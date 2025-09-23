@@ -20,7 +20,6 @@ namespace FionaAutomation.Reports
                 Directory.CreateDirectory(dir);
             }
 
-            // Now use the full correct path
             var sparkReporter = new ExtentSparkReporter(reportPath);
             _extent = new ExtentReports();
             _extent.AttachReporter(sparkReporter);
@@ -39,6 +38,11 @@ namespace FionaAutomation.Reports
         public static void LogPass(string message)
         {
             _test?.Pass(message);
+        }
+
+         public static void LogInfo(string message)
+        {
+            _test?.Info(message);
         }
 
         // Log a failed step

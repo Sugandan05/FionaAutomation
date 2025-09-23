@@ -31,21 +31,17 @@ namespace FionaAutomation.Tests
             string baseUrl = config["baseUrl"]!;
             string browser = config["browser"]!;
             bool headed = bool.Parse(config["headed"]!);
-
             string username = config["TestSettings:ValidUser:Username"]!;
             string password = config["TestSettings:ValidUser:Password"]!;
 
             var page = await PlaywrightDriver.GetPageAsync(headed: true);
-
             var loginPage = new LoginPage(page);
             var loginActions = new LoginPageActions(loginPage);
 
-
             await page.GotoAsync(baseUrl);
-
-            ExtentReportManager.LogPass("Browser launched successfully");
+            ExtentReportManager.LogInfo("Browser launched successfully");
             await loginActions.ClickLogin();
-            ExtentReportManager.LogPass("Clicked login button");
+            ExtentReportManager.LogInfo("Clicked login button");
             await loginActions.EnterUsername(username);
             await loginActions.ClickNextButton();
             await loginActions.EnterPassword(password);
@@ -75,6 +71,7 @@ namespace FionaAutomation.Tests
 
 
         }
+
 
     }
 }

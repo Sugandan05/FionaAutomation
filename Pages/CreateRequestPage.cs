@@ -13,6 +13,9 @@ namespace FionaAutomation.Pages
         }
         private ILocator AllDropdowns => _page.Locator("input[placeholder='Select']");
         public ILocator btnCreateRequest => _page.Locator("text=CREATE NEW REQUEST");
+
+        public ILocator btnEditRequest => _page.Locator("[data-testid='EditOutlinedIcon']");
+
         public ILocator txtDate => _page.Locator("input[placeholder='DD/MM/YYYY']");
         public ILocator ddlPaymentType => AllDropdowns.Nth(0);
         public ILocator ddlPaymentRegion => AllDropdowns.Nth(1);
@@ -28,7 +31,16 @@ namespace FionaAutomation.Pages
         public ILocator txtDescription => _page.Locator("//textarea[@data-testid='mwl-textbox']").Nth(0);
         public ILocator btnSubmitRequest => _page.Locator("text=SUBMIT REQUEST");
 
-       public ILocator toastMessage => _page.Locator("div.MuiSnackbarContent-message");
+
+        public ILocator requestRows => _page.Locator("tr.request-row");
+
+        public ILocator GetStatusChip(ILocator row) => row.Locator("span.MuiChip-label");
+
+
+
+        public ILocator toastMessage => _page.Locator("div.MuiSnackbarContent-message");
+
+
 
     }
 }

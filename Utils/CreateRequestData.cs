@@ -1,4 +1,4 @@
-namespace FionaAutomation.Models
+namespace FionaAutomation.Utils
 {
     public class CreateRequestData
     {

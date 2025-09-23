@@ -9,61 +9,66 @@ namespace FionaAutomation.Drivers
         private static IBrowser _browser;
         private static IPage _page;
 
-        // Launch Chrome with full-screen rendering using --start-maximized
         public static async Task<IPage> GetPageAsync(bool headed = true, bool useProfile = false, string profilePath = "C:\\Temp\\ChromeProfile")
         {
             if (_playwright == null)
-            {
                 _playwright = await Playwright.CreateAsync();
-            }
 
-            if (_browser == null)
+            if (_browser == null && !useProfile)
             {
-                var launchOptions = new BrowserTypeLaunchOptions
+                // Launch browser maximized
+                _browser = await _playwright.Chromium.LaunchAsync(new BrowserTypeLaunchOptions
                 {
                     Headless = !headed,
-                    Channel = "chrome",  // Ensures real Chrome, not Chromium
-                    //Args = new[] { "--start-maximized" },
-                    SlowMo = 50
-                };
+                    Channel = "chrome",
+                   // Args = new[] { "--start-maximized" }
+                    Args = new[] { "--window-size=1920,1080" }
+                });
+            }
 
-                // If you want persistent profile data
-                if (useProfile)
-                {
-                    // Launch with persistent context (saves cookies, sessions, etc.)
-                    var context = await _playwright.Chromium.LaunchPersistentContextAsync(profilePath, new BrowserTypeLaunchPersistentContextOptions
+            if (useProfile)
+            {
+                var context = await _playwright.Chromium.LaunchPersistentContextAsync(profilePath,
+                    new BrowserTypeLaunchPersistentContextOptions
                     {
                         Headless = !headed,
                         Channel = "chrome",
-                       // Args = new[] { "--start-maximized" }
+                        ViewportSize = null
+                        //ViewportSize = new ViewportSize { Width = 1920, Height = 1080 }
                     });
 
-                    _page = await context.NewPageAsync();
-                    return _page;
-                }
+                _page = context.Pages.Count > 0 ? context.Pages[0] : await context.NewPageAsync();
+            
+            }
+            else
+            {
+                var newContext = await _browser.NewContextAsync(new BrowserNewContextOptions
+                {
+                    ViewportSize = null
+                    //ViewportSize = new ViewportSize { Width = 1920, Height = 1080 }
+                });
 
-                // Regular browser (fresh profile each run)
-                _browser = await _playwright.Chromium.LaunchAsync(launchOptions);
+                _page = await newContext.NewPageAsync();
             }
 
-            // Create context with no fixed viewport for true maximized mode
-            var newContext = await _browser.NewContextAsync(new BrowserNewContextOptions
-            {
-                ViewportSize = null
-            });
+            // Reset zoom level to 60%
+            await _page.EvaluateAsync("() => { document.body.style.zoom = '60%'; }");
 
-            _page = await newContext.NewPageAsync();
             return _page;
         }
 
         public static IPage CurrentPage => _page;
-        // Close the browser after tests
+
         public static async Task CloseBrowserAsync()
         {
             if (_browser != null)
             {
                 await _browser.CloseAsync();
                 _browser = null;
+            }
+
+            if (_playwright != null)
+            {
                 _playwright.Dispose();
                 _playwright = null;
             }

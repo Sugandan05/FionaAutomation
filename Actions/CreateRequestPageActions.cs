@@ -1,4 +1,5 @@
 using FionaAutomation.Pages;
+using Microsoft.Playwright;
 
 namespace FionaAutomation.Actions
 {
@@ -16,8 +17,10 @@ namespace FionaAutomation.Actions
         public async Task SelectPaymentType(string paymentType)
         {
             await _locators.ddlPaymentType.FillAsync(paymentType);
-            await Task.Delay(500); 
+            await Task.Delay(500);
             await _locators.ddlPaymentType.PressAsync("ArrowDown");
+            
+            await _locators.ddlPaymentType.PressAsync("Enter");
             await _locators.ddlPaymentType.PressAsync("Enter");
         }
 
@@ -57,7 +60,7 @@ namespace FionaAutomation.Actions
             await _locators.ddlCurrency.PressAsync("Enter");
         }
 
-        public async Task SelectEntity(string entity) 
+        public async Task SelectEntity(string entity)
         {
             await _locators.ddlEntity.FillAsync(entity);
             await Task.Delay(500);
@@ -68,9 +71,9 @@ namespace FionaAutomation.Actions
         public async Task EnterNominalAccount(string nominalAccount) => await _locators.txtNominalAccount.FillAsync(nominalAccount);
         public async Task EnterDescription(string description) => await _locators.txtDescription.FillAsync(description);
         public async Task ClickSubmitRequest() => await _locators.btnSubmitRequest.ClickAsync();
-
-
-
+        public async Task ClickEditRequest() => await _locators.btnEditRequest.ClickAsync();
+        public ILocator ToastMessage => _locators.toastMessage;
+        
 
     }
 }

@@ -577,6 +577,7 @@ C:\Users\Sugandan\FionaAutomation\obj\Debug\net8.0\FionaAutomation.genautoregist
 C:\Users\Sugandan\FionaAutomation\obj\Debug\net8.0\FionaAutomation.AssemblyInfoInputs.cache
 C:\Users\Sugandan\FionaAutomation\obj\Debug\net8.0\FionaAutomation.AssemblyInfo.cs
 C:\Users\Sugandan\FionaAutomation\obj\Debug\net8.0\FionaAutomation.csproj.CoreCompileInputs.cache
+C:\Users\Sugandan\FionaAutomation\obj\Debug\net8.0\FionaAutomation.sourcelink.json
 C:\Users\Sugandan\FionaAutomation\obj\Debug\net8.0\FionaAut.4D9984BE.Up2Date
 C:\Users\Sugandan\FionaAutomation\obj\Debug\net8.0\FionaAutomation.dll
 C:\Users\Sugandan\FionaAutomation\obj\Debug\net8.0\refint\FionaAutomation.dll
