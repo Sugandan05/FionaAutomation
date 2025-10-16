@@ -4,7 +4,7 @@ namespace FionaAutomation.Pages
 {
     public class ApprovalPage
     {
-        private readonly IPage _page;
+    public readonly IPage _page;
 
         public ApprovalPage(IPage page)
         {
@@ -18,11 +18,16 @@ namespace FionaAutomation.Pages
         public ILocator btnSelectRow => _page.Locator("//input[@name='select_row']").Nth(0);
         public ILocator btnSelectRow1 => _page.Locator("//input[@name='select_row']").Nth(1);
         public ILocator btnSelectAllRow => _page.Locator("input[aria-label='Select all rows']");
-        public ILocator txtRejectReason => _page.Locator("//input[@data-testid='mwl-textbox']");
-        public ILocator btnRejectRequest => _page.Locator("text=Reject Request");
-        public ILocator btnApproveAll => _page.Locator("text=APPROVE ALL");
-        public ILocator btnRejectAll => _page.Locator("text=REJECT ALL");
-        public ILocator txtBulkRejectReason => _page.Locator("//input[@data-testid='mwl-textbox']");
+        // Add locator for multi-select checkbox at the top of the grid (if different from btnSelectAllRow)
+        public ILocator multiSelectCheckbox => _page.Locator("input[type='checkbox']").First;
+        public ILocator btnApproveAll => _page.Locator("button:has-text('Approve All')");
+        public ILocator btnRejectAll => _page.Locator("button:has-text('Reject All')");
+        public ILocator txtRejectReason => _page.Locator("//textarea[@data-testid='mwl-textbox']");
+        //public ILocator btnRejectRequest => _page.Locator("text=REJECT REQUEST");
+        public ILocator btnRejectRequest => _page.GetByRole(AriaRole.Button, new() { Name = "Reject Request" });
+
+    // Removed duplicate/incorrect locators
+        public ILocator txtBulkRejectReason => _page.Locator("//textarea[@data-testid='mwl-textbox']");
         public ILocator btnProceed => _page.Locator("text=PROCEED");
         public ILocator txtPendingTab => _page.Locator("button:has-text('PENDING')");
         public ILocator txtPendingCount => _page.Locator("span.MuiChip-label");

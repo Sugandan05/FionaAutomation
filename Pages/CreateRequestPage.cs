@@ -30,6 +30,8 @@ namespace FionaAutomation.Pages
         public ILocator txtNominalAccount => _page.Locator("//input[@data-testid='mwl-textbox']").Nth(11);
         public ILocator txtDescription => _page.Locator("//textarea[@data-testid='mwl-textbox']").Nth(0);
         public ILocator btnSubmitRequest => _page.Locator("text=SUBMIT REQUEST");
+        public ILocator RequestorNameLabel => _page.Locator("xpath=//p[contains(text(),'Requestor Name:')]");
+        public ILocator RequestDateLabel => _page.Locator("xpath=//p[contains(text(),'Request Date:')]");
 
 
         public ILocator requestRows => _page.Locator("tr.request-row");

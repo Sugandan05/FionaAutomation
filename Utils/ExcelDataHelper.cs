@@ -57,7 +57,7 @@ namespace FionaAutomation.Utils
             {
                 var worksheet = workbook.Worksheet(sheetName);
                 var rows = worksheet.RangeUsed().RowsUsed().Skip(1); // Skip header row
-
+                var rows1 = worksheet.RangeUsed().RowsUsed().Skip(2);
                 foreach (var row in rows)
                 {
                     var requestData = new CreateRequestData
@@ -73,16 +73,29 @@ namespace FionaAutomation.Utils
                         IBAN = row.Cell(9).GetString(),
                         BIC = row.Cell(10).GetString(),
                         NetValue = row.Cell(11).GetString(),
-                         VATApplicable = row.Cell(12).GetString(),
+                        VATApplicable = row.Cell(12).GetString(),
                         VATAmount = row.Cell(13).GetString(),
-                       // JournalAccount = row.Cell(14).GetString(),
+                        // JournalAccount = row.Cell(14).GetString(),
                         Currency = row.Cell(14).GetString(),
                         Entity = row.Cell(15).GetString(),
                         NominalAccount = row.Cell(16).GetString(),
+                       
                         CostCentre = row.Cell(17).GetString(),
                         Description = row.Cell(18).GetString(),
                         AdditionalComments = row.Cell(20).GetString(),
                         SupportingDocumentPath = row.Cell(21).GetString()
+                    };
+
+                    requestDataList.Add(requestData);
+                }
+                
+                foreach (var row in rows1)
+                {
+                    var requestData = new CreateRequestData
+                    {
+                        
+                        NominalAccount1 = row.Cell(16).GetString(),
+                    
                     };
 
                     requestDataList.Add(requestData);

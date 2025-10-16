@@ -17,7 +17,11 @@ namespace FionaAutomation
         [OneTimeSetUp]
         public void Initialize()
         {
-            _excel = new ExcelHelper(@"Config\Testcases.xlsx");
+            string filePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Config", "Testcases.xlsx");
+            _excel = new ExcelHelper(filePath);
+            TestStepLogger.Initialize(filePath);
+
+    
         }
 
         [Test]

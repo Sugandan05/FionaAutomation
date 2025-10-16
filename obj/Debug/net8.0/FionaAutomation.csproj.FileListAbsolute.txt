@@ -5,6 +5,14 @@ C:\Users\Sugandan\Fiona Automation\obj\Debug\net8.0\FionaAutomation.genautoregis
 C:\Users\Sugandan\Fiona Automation\obj\Debug\net8.0\FionaAutomation.AssemblyInfoInputs.cache
 C:\Users\Sugandan\Fiona Automation\obj\Debug\net8.0\FionaAutomation.AssemblyInfo.cs
 C:\Users\Sugandan\Fiona Automation\obj\Debug\net8.0\FionaAutomation.csproj.CoreCompileInputs.cache
+C:\Users\Sugandan\FionaAutomation\obj\Debug\net8.0\FionaAutomation.csproj.AssemblyReference.cache
+C:\Users\Sugandan\FionaAutomation\obj\Debug\net8.0\FionaAutomation.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Sugandan\FionaAutomation\obj\Debug\net8.0\FionaAutomation.gentestingplatformentrypointinputcache.cache
+C:\Users\Sugandan\FionaAutomation\obj\Debug\net8.0\FionaAutomation.genautoregisteredextensionsinputcache.cache
+C:\Users\Sugandan\FionaAutomation\obj\Debug\net8.0\FionaAutomation.AssemblyInfoInputs.cache
+C:\Users\Sugandan\FionaAutomation\obj\Debug\net8.0\FionaAutomation.AssemblyInfo.cs
+C:\Users\Sugandan\FionaAutomation\obj\Debug\net8.0\FionaAutomation.csproj.CoreCompileInputs.cache
+C:\Users\Sugandan\FionaAutomation\obj\Debug\net8.0\FionaAutomation.sourcelink.json
 C:\Users\Sugandan\FionaAutomation\bin\Debug\net8.0\testhost.dll
 C:\Users\Sugandan\FionaAutomation\bin\Debug\net8.0\testhost.exe
 C:\Users\Sugandan\FionaAutomation\bin\Debug\net8.0\.playwright\node\win32_x64\node.exe
@@ -570,14 +578,6 @@ C:\Users\Sugandan\FionaAutomation\bin\Debug\net8.0\runtimes\unix\lib\netcoreapp3
 C:\Users\Sugandan\FionaAutomation\bin\Debug\net8.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
 C:\Users\Sugandan\FionaAutomation\bin\Debug\net8.0\runtimes\browser\lib\net8.0\System.Text.Encodings.Web.dll
 C:\Users\Sugandan\FionaAutomation\bin\Debug\net8.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
-C:\Users\Sugandan\FionaAutomation\obj\Debug\net8.0\FionaAutomation.csproj.AssemblyReference.cache
-C:\Users\Sugandan\FionaAutomation\obj\Debug\net8.0\FionaAutomation.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Sugandan\FionaAutomation\obj\Debug\net8.0\FionaAutomation.gentestingplatformentrypointinputcache.cache
-C:\Users\Sugandan\FionaAutomation\obj\Debug\net8.0\FionaAutomation.genautoregisteredextensionsinputcache.cache
-C:\Users\Sugandan\FionaAutomation\obj\Debug\net8.0\FionaAutomation.AssemblyInfoInputs.cache
-C:\Users\Sugandan\FionaAutomation\obj\Debug\net8.0\FionaAutomation.AssemblyInfo.cs
-C:\Users\Sugandan\FionaAutomation\obj\Debug\net8.0\FionaAutomation.csproj.CoreCompileInputs.cache
-C:\Users\Sugandan\FionaAutomation\obj\Debug\net8.0\FionaAutomation.sourcelink.json
 C:\Users\Sugandan\FionaAutomation\obj\Debug\net8.0\FionaAut.4D9984BE.Up2Date
 C:\Users\Sugandan\FionaAutomation\obj\Debug\net8.0\FionaAutomation.dll
 C:\Users\Sugandan\FionaAutomation\obj\Debug\net8.0\refint\FionaAutomation.dll

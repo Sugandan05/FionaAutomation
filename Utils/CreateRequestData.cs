@@ -19,6 +19,7 @@ namespace FionaAutomation.Utils
         public string VATAmount { get; set; }
         public string NetValue { get; set; }
         public string NominalAccount { get; set; }
+        public string NominalAccount1 { get; set; }
         public string CostCentre { get; set; }
         public string Description { get; set; }
         public string AdditionalComments { get; set; }

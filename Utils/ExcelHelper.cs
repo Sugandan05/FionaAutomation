@@ -25,8 +25,9 @@ namespace FionaAutomation.Utils
             if (string.IsNullOrWhiteSpace(relativeFilePath))
                 throw new ArgumentNullException(nameof(relativeFilePath));
 
-            
+
             var projectRoot = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, @"..\..\..\"));
+
             _filePath = Path.Combine(projectRoot, relativeFilePath);
 
             if (!File.Exists(_filePath))
@@ -71,8 +72,6 @@ namespace FionaAutomation.Utils
                     break;
                 }
             }
-
-         
             _workbook.Save();
         }
     }

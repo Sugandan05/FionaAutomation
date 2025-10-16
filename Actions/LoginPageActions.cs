@@ -1,4 +1,5 @@
 using FionaAutomation.Pages;
+using Microsoft.Playwright;
 
 namespace FionaAutomation.Actions
 {
@@ -17,5 +18,11 @@ namespace FionaAutomation.Actions
         public async Task EnterPassword(string password) => await _locators.Passwordfield.FillAsync(password);
         public async Task ClickSigninButton() => await _locators.SignInButton.ClickAsync();
         public async Task ClickBackButton() => await _locators.BackButton.ClickAsync();
+
+        public async Task<bool> IsMicrosoftLoginPageAsync()
+        {
+            await _locators.msSignInButton.WaitForAsync(new() { State = WaitForSelectorState.Visible, Timeout = 10000 });
+            return await _locators.msSignInButton.IsVisibleAsync();
+        }
     }
 }

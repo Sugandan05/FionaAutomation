@@ -1,25 +1,50 @@
 using FionaAutomation.Pages;
 using Microsoft.Playwright;
+using NUnit.Framework;
+using FionaAutomation.Utils;
+using FionaAutomation.Reports;
 
 namespace FionaAutomation.Actions
 {
     public class CreateRequestPageActions
     {
         private readonly CreateRequestPage _locators;
+        private readonly IPage _page;
 
-        public CreateRequestPageActions(CreateRequestPage locators)
+        public CreateRequestPageActions(CreateRequestPage locators, IPage page)
         {
             _locators = locators;
+            _page = page;
         }
 
         public async Task ClickCreateRequest() => await _locators.btnCreateRequest.ClickAsync();
+
+        public async Task ValidateRequestDetailsAsync()
+        {
+            var requestorName = await _locators.RequestorNameLabel.InnerTextAsync();
+            var requestDate = await _locators.RequestDateLabel.InnerTextAsync();
+
+            try
+            {
+                Assert.That(requestorName, Does.Contain("AI Test"), "Requestor Name should be 'AI Test'");
+                string today = DateTime.Now.ToString("dd/MM/yyyy");
+                Assert.That(requestDate, Does.Contain(today), $"Request Date should be today's date: {today}");
+            }
+            catch (AssertionException ex)
+            {
+                string screenshotPath = await ScreenshotHelper.CaptureScreenshotAsync(_page, "ValidateRequestDetails_Fail");
+                ExtentReportManager.AttachScreenshot(screenshotPath);
+                throw;
+            }
+        }
+
         public async Task EnterDate(string date) => await _locators.txtDate.FillAsync(date);
         public async Task SelectPaymentType(string paymentType)
         {
             await _locators.ddlPaymentType.FillAsync(paymentType);
             await Task.Delay(500);
             await _locators.ddlPaymentType.PressAsync("ArrowDown");
-            
+
             await _locators.ddlPaymentType.PressAsync("Enter");
             await _locators.ddlPaymentType.PressAsync("Enter");
         }
@@ -73,7 +98,25 @@ namespace FionaAutomation.Actions
         public async Task ClickSubmitRequest() => await _locators.btnSubmitRequest.ClickAsync();
         public async Task ClickEditRequest() => await _locators.btnEditRequest.ClickAsync();
         public ILocator ToastMessage => _locators.toastMessage;
-        
+
+        public async Task ValidateToastMessageAsync(string expectedMessage)
+{
+    var toastMessage = _locators.toastMessage;
+    string actualMessage = await toastMessage.InnerTextAsync();
+
+    try
+    {
+        Assert.That(actualMessage, Is.EqualTo(expectedMessage), "Toast message mismatch");
+    }
+    catch (AssertionException ex)
+    {
+        string screenshotPath = await ScreenshotHelper.CaptureScreenshotAsync(_page, "ToastMessage_Fail");
+        ExtentReportManager.AttachScreenshot(screenshotPath);
+        throw;
+    }
+}
+
+
 
     }
 }

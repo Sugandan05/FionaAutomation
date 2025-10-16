@@ -25,7 +25,7 @@ namespace FionaAutomation.Tests
 
             _page = PlaywrightDriver.CurrentPage;
             var createRequestPage = new CreateRequestPage(_page);
-            _createRequestActions = new CreateRequestPageActions(createRequestPage);
+            _createRequestActions = new CreateRequestPageActions(createRequestPage, _page);
             var approvalPage = new ApprovalPage(_page);
             _approvalActions = new ApprovalPageActions(approvalPage);
 
@@ -40,6 +40,7 @@ namespace FionaAutomation.Tests
 
 
             await _createRequestActions.ClickCreateRequest();
+            await _createRequestActions.ValidateRequestDetailsAsync();
             await _createRequestActions.EnterDate(testData.PaymentDueBy);
             await _createRequestActions.SelectPaymentType(testData.PaymentType);
             await Task.Delay(1000);
@@ -57,16 +58,14 @@ namespace FionaAutomation.Tests
             //await Task.Delay(3000);
             await _createRequestActions.SelectEntity(testData.Entity);
             //await Task.Delay(1000);
-            await _createRequestActions.EnterNominalAccount(testData.NominalAccount);
+            //await _createRequestActions.EnterNominalAccount(testData.NominalAccount1);
+
+            // await _createRequestActions.EnterNominalAccount(testData.NominalAccount);
             await _createRequestActions.EnterDescription(testData.Description);
             await _createRequestActions.ClickSubmitRequest();
 
+          await _createRequestActions.ValidateToastMessageAsync("Request Created Successfully");
 
-            var toastMessage = _createRequestActions.ToastMessage;
-            string actualtoaster = await toastMessage.InnerTextAsync();
-            string expectedtoaster = "Request Created Successfully";
-
-            Assert.That(actualtoaster, Is.EqualTo(expectedtoaster), "Toast message mismatch");
 
 
         }
@@ -76,38 +75,18 @@ namespace FionaAutomation.Tests
             var testData = ExcelDataHelper.GetCreateRequestData(filePath, "Sheet2").First();
             await Task.Delay(3000);
             await _createRequestActions.ClickEditRequest();
+            //await Task.Delay(1000);
+            await _createRequestActions.SelectAccountType(testData.AccountType);
+            await _createRequestActions.SelectAccount(testData.AccountName);
+            //await Task.Delay(3000);
+            await _createRequestActions.EnterBeneficiaryName(testData.BeneficiaryName);
 
 
         }
+      
 
-        public async Task ApproveRequest()
-        {
-            await Task.Delay(3000);
-            await _approvalActions.ClickAdhocPayments();
-            await _approvalActions.ClickApprovalspage();
-            await _approvalActions.ClickApprove();
+        
 
-            var toastMessage = _approvalActions.ToastMessage;
-            string actualtoaster = await toastMessage.InnerTextAsync();
-            string expectedtoaster = "Request Approved Successfully";
-
-          //  Assert.That(actualtoaster, Is.EqualTo(expectedtoaster), "Toast message mismatch");
-
-            try
-            {
-                Assert.That(actualtoaster, Is.EqualTo(expectedtoaster), "Toast message mismatch");
-            }
-            catch (AssertionException ex)
-            {
-                // Capture screenshot only when assert fails
-                string screenshotPath = await ScreenshotHelper.CaptureScreenshotAsync(_page, "ApproveRequest_Fail");
-                ExtentReportManager.AttachScreenshot(screenshotPath);
-
-                // Rethrow to fail the test
-                throw;
-            }
-        }
-
-
+        
     }
 }
