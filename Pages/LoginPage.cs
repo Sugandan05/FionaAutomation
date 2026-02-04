@@ -13,10 +13,23 @@ namespace FionaAutomation.Pages
         }
 
         public ILocator msSignInButton => _page.Locator("text=Sign in with Microsoft");
+
         public ILocator Usernamefield => _page.Locator("#i0116");
         public ILocator NextButton1 => _page.Locator("#idSIButton9");
         public ILocator Passwordfield => _page.Locator("#i0118");
         public ILocator SignInButton => _page.Locator("#idSIButton9");
         public ILocator BackButton => _page.Locator("#idBtn_Back");
+
+      public ILocator AdhocPaymentsCard =>
+    _page.Locator(".landing-page-card-mapping", new()
+    {
+        HasText = "Ad-hoc payments"
+    })
+    .Locator(":visible")
+    .First;
+
+
+
+
     }
 }

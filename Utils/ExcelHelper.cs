@@ -34,7 +34,7 @@ namespace FionaAutomation.Utils
                 throw new FileNotFoundException($"Excel file not found at {_filePath}");
 
             _workbook = new XLWorkbook(_filePath);
-            _worksheet = _workbook.Worksheet(1); // First sheet
+            _worksheet = _workbook.Worksheet(4); // First sheet
         }
 
         public List<TestCase> GetTests()

@@ -2,7 +2,7 @@ using FionaAutomation.Pages;
 using Microsoft.Playwright;
 using NUnit.Framework;
 using FionaAutomation.Utils;
-using FionaAutomation.Reports;
+
 
 namespace FionaAutomation.Actions
 {
@@ -24,19 +24,12 @@ namespace FionaAutomation.Actions
             var requestorName = await _locators.RequestorNameLabel.InnerTextAsync();
             var requestDate = await _locators.RequestDateLabel.InnerTextAsync();
 
-            try
-            {
-                Assert.That(requestorName, Does.Contain("AI Test"), "Requestor Name should be 'AI Test'");
-                string today = DateTime.Now.ToString("dd/MM/yyyy");
-                Assert.That(requestDate, Does.Contain(today), $"Request Date should be today's date: {today}");
-            }
-            catch (AssertionException ex)
-            {
-                string screenshotPath = await ScreenshotHelper.CaptureScreenshotAsync(_page, "ValidateRequestDetails_Fail");
-                ExtentReportManager.AttachScreenshot(screenshotPath);
-                throw;
-            }
+            string today = DateTime.Now.ToString("dd/MM/yyyy");
+
+            Assert.That(requestorName, Does.Contain("AI Test"), "Requestor Name should be 'AI Test'");
+            Assert.That(requestDate, Does.Contain(today), $"Request Date should be today's date: {today}");
         }
+
 
         public async Task EnterDate(string date) => await _locators.txtDate.FillAsync(date);
         public async Task SelectPaymentType(string paymentType)
@@ -100,21 +93,20 @@ namespace FionaAutomation.Actions
         public ILocator ToastMessage => _locators.toastMessage;
 
         public async Task ValidateToastMessageAsync(string expectedMessage)
-{
-    var toastMessage = _locators.toastMessage;
-    string actualMessage = await toastMessage.InnerTextAsync();
+        {
+            var toastMessage = _locators.toastMessage;
+            string actualMessage = await toastMessage.InnerTextAsync();
 
-    try
-    {
-        Assert.That(actualMessage, Is.EqualTo(expectedMessage), "Toast message mismatch");
-    }
-    catch (AssertionException ex)
-    {
-        string screenshotPath = await ScreenshotHelper.CaptureScreenshotAsync(_page, "ToastMessage_Fail");
-        ExtentReportManager.AttachScreenshot(screenshotPath);
-        throw;
-    }
-}
+            try
+            {
+                Assert.That(actualMessage, Is.EqualTo(expectedMessage), "Toast message mismatch");
+            }
+            catch (AssertionException ex)
+            {
+                string screenshotPath = await ScreenshotHelper.CaptureScreenshotAsync(_page, "ToastMessage_Fail");
+                throw;
+            }
+        }
 
 
 

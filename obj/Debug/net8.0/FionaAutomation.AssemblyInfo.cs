@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("FionaAutomation")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5d3c9685cbd688b2126603d7b5472f2665dea447")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ae531f0dc0062e9e47a104b8560036ac578ec5d0")]
 [assembly: System.Reflection.AssemblyProductAttribute("FionaAutomation")]
 [assembly: System.Reflection.AssemblyTitleAttribute("FionaAutomation")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

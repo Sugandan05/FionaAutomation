@@ -3,68 +3,50 @@ using AventStack.ExtentReports.Reporter;
 
 namespace FionaAutomation.Reports
 {
+
     public static class ExtentReportManager
     {
         private static ExtentReports? _extent;
-        private static ExtentTest? _test;
 
-        // Initialize Extent Report with custom file path
         public static void InitReport(string reportPath)
         {
-            // Get the directory part only
-            string dir = Path.GetDirectoryName(reportPath);
-
-            // Ensure directory exists
+            var dir = Path.GetDirectoryName(reportPath);
             if (!Directory.Exists(dir))
-            {
                 Directory.CreateDirectory(dir);
-            }
 
-            var sparkReporter = new ExtentSparkReporter(reportPath);
+            var spark = new ExtentSparkReporter(reportPath);
             _extent = new ExtentReports();
-            _extent.AttachReporter(sparkReporter);
+            _extent.AttachReporter(spark);
         }
 
-
-        // Create a new test case node in the report
         public static ExtentTest CreateTest(string testName)
         {
-            _test = _extent?.CreateTest(testName);
-            return _test;
+            return _extent.CreateTest(testName);
         }
-
-
-        // Log a passed step
-        public static void LogPass(string message)
+        public static void LogPass(ExtentTest test, string message)
         {
-            _test?.Pass(message);
+            test.Pass(message);
         }
 
-         public static void LogInfo(string message)
+        public static void LogInfo(ExtentTest test, string message)
         {
-            _test?.Info(message);
+            test.Info(message);
         }
 
-        // Log a failed step
-        public static void LogFail(string message)
+        public static void LogFail(ExtentTest test, string message)
         {
-            _test?.Fail(message);
+            test.Fail(message);
         }
 
-        // Save the report after execution 
+
+        public static void AttachScreenshot(ExtentTest test, string relativePath)
+        {
+            test.AddScreenCaptureFromPath(relativePath);
+        }
 
         public static void FlushReport()
         {
-            _extent?.Flush();
+            _extent.Flush();
         }
-        public static void AttachScreenshot(string relativePath)
-        {
-            if (_test != null && !string.IsNullOrEmpty(relativePath))
-            {
-                _test.AddScreenCaptureFromPath(relativePath);
-            }
-        }
-
-
     }
 }

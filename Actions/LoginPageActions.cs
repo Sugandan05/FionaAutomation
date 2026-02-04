@@ -24,5 +24,15 @@ namespace FionaAutomation.Actions
             await _locators.msSignInButton.WaitForAsync(new() { State = WaitForSelectorState.Visible, Timeout = 10000 });
             return await _locators.msSignInButton.IsVisibleAsync();
         }
+
+        public async Task AdhocPaymentsCard()
+        {
+            await _locators.AdhocPaymentsCard.WaitForAsync();
+            await _locators.AdhocPaymentsCard.ClickAsync();
+            Console.WriteLine(
+    await _locators.AdhocPaymentsCard.IsVisibleAsync()
+);
+
+        }
     }
 }

@@ -6,6 +6,8 @@ using FionaAutomation.Pages;
 using System;
 using System.Threading.Tasks;
 using NUnit.Framework;
+using AventStack.ExtentReports;
+
 
 namespace FionaAutomation.Tests
 {
@@ -22,7 +24,8 @@ namespace FionaAutomation.Tests
             _loginActions = new LoginPageActions(loginPage);
         }
 
-        public async Task TestValidLogin()
+       public async Task TestValidLogin()
+
         {
             //var test = ExtentReportManager.CreateTest("Login Test");
             var config = ConfigReader.GetConfig();
@@ -51,12 +54,15 @@ namespace FionaAutomation.Tests
             //     });
             await page.GotoAsync(baseUrl);
             await loginActions.ClickLogin();
-            ExtentReportManager.LogInfo("Clicked login button");
+            //ExtentReportManager.LogInfo(extentTest, "Clicked login button");
             await loginActions.EnterUsername(username);
             await loginActions.ClickNextButton();
             await loginActions.EnterPassword(password);
             await loginActions.ClickSigninButton();
-            await loginActions.ClickBackButton();
+    await loginActions.ClickBackButton();
+    await Task.Delay(2000);
+    await loginActions.AdhocPaymentsCard();
+            //ExtentReportManager.LogInfo(extentTest,"Logged in successfully");
 
 
             //ScreenshotHelper.CaptureScreenshotAsync(page, "TestValidLogin").Wait();
